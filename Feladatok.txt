@@ -1,0 +1,57 @@
+Elsõ feladat
+
+Hansel és Gretel hegyes-völgyes, 10km x 10km-es négyzet alakú, kerítéssel körbevett erdõben rohangál (gyorsan), ahol elvesztették egymást.
+
+A legmélyebb völgy tengerszint feletti magassága 250m, a legmagasabb hegycsúcsé 1014m. A terep magasságát tetszõleges differenciálható, egynél több lokális minimummal és maximummal rendelkezõ függvénnyel definiálhatja, ami célszerûen különbözik a közeli barátok függvényeitõl.
+
+Az erdõ egy (pszeudo) véletlenszerûen kiválasztott pontján egy 20 m magas torony tetején mobiltelefon antenna található. A 't' billentyû lenyomásának hatására a telefontársaság egy brigádja kiszáll és egy szempillantás alatt egy másik (pszeudo) véletlen pontra telepíti a tornyot. Hansel az egér bal gomb lenyomásának helyét, Gretel pedig a jobb gomb lenyomásának helyét célozza meg, újabb egéreseményeknél irányt váltanak, a kerítéshez érve billiárd golyóhoz hasonlóan visszaverõdnek.
+
+Értelemszerûen Hansel és Gretel a terepen halad. Hansel és Gretel terepmenti sebessége (figyelem, ez nem egyezik meg a felülnézetbõl észlelt sebességgel) V*(1-M/90), ahol V=1000 m/s a vízszintes talajon elérhetõ sebesség, M pedig a terep meredeksége fokban (lejtõ esetén a meredekség negatív). A meredekséget a függvénybõl szimbolikus deriválással (azaz nem differenciahányados közelítéssel) kell számítani, célszerûen saját kézzel, nem pedig valamely matematikai csomag felhasználásával.
+
+A világ aktuális állapotát felülnézetbõl kell megjeleníteni, ahol a terepet szürkeárnyalatos képként ábrázoljuk, a legmagasabb pont fehér, a legalacsonyabb pont fekete, a közbensõ magasságok pedig arányosan szürkék. Hansel és Gretel a Mars, illetve a Vénusz jelét kapják, Hansel világoskék, Gretel pedig rózsaszín. A bolygók jelében található köröket százszöggel kell közelíteni. A torony felülnézetben egy sárga háromszögnek látszik. A feladat azon pillanatok azonosítása, amikor Gretel mobilozhat Hanselnek, azaz, amikor mindketten rálátnak az antennára. Ekkor a torony, Hansel és Gretel között egy piros háromszöget kell kirajzolni. A fénykép tetején egy progress-bar mutatja, hogy az idõ hányad részében tudta elérni Gretel Hanselt.
+
+A feladatot diszkrét-idõ szimulációval kell megoldani, ahol a mintavételi idõ 100 msec. A láthatóságot sugármasírozással (ray-marching) lehet ellenõrizni, legfeljebb 100m-res lépésközt alkalmazva.
+
+Beadási határidõ: 2012. 09. 30. 23:59
+
+Második feladat
+
+Középfölde királya új görbét talált fel, amit szerénytelenül KK-spline-nak nevezett el.
+
+A következõképpen okoskodott: Minden egymás követõ három vezérlõpontra egy másodfokú paraméteres görbét illesztünk, így két vezérlõpont között, a legelsõ és legutolsó párt kivéve, mindig két másodfokú paraméteres görbe látható, amelyek legyenek A és B. Egy másodfokú paraméteres görbe három pontját rendre kezdõ, középsõ és megint kezdõ pontnak hívjuk. Két vezérlõpont között az egyik vezérlõpont az A görbének a középsõ pontja a B görbének pedig a kezdõ pontja. A másik vezérlõpont ugyanakkor a B görbének a középsõ pontja és az A kezdõpontja. A két görbeívbõl csináljunk egyetlen görbét konvex kombinációval úgy, hogy a középsõ pontban a másodfokú paraméteres görbe súlya 1, a kezdõ, illetve végpontban pedig 0, közöttük pedig lineárisan változik.
+
+Középfölde királya szeretné, ha a görbéje kiszorítaná a Catmull-Rom spline-t, ezért Önt kérte meg, hogy egy rajzolóprogramot írjon, demonstrálandó találmánya nagyszerûségét.
+
+A rajzolóprogram a világot 0..1000 x 0..1000 mm-es négyzetben tárolja (ez felelne meg Powerpoint-ban a slide-nak), ezen kívül nem lehet rajzolni. Kezdetben a kameraablak bal alsó sarka a világ (100,100) koordinátájú pontjában van, a jobb-felsõ sarka pedig az (500,500) pontban. A rajzolóprogram az egér bal gomb lenyomására egy-egy újabb kontrollpontot vesz fel. A vezérlõpontok maximális száma 100. A vezérpontokhoz rendelt paraméterértékek tetszõleges olyan növekvõ sorozatot alkothatnak, amelyben a növekmény az összes korábbitól különbözõ (pl. nem jó: 0,1,2,...; jó: 1, 2, 4, 7...). A kontrollpontokra KK-spline-t, és az összehasonlítás érdekében Catmull-Rom spline-t illeszt a program, és a teljes paramétertartományt 1000 részre osztva vektorizál, majd töröttvonalként rajzolja fel a két görbét. A KK-spline piros színben, a Catmull-Rom spline zöldben jelenik meg, ahol takarnák egymást, ott a KK-spline-nak van prioritása. Az egér jobb billentyûjének lenyomásával a görbéket ki lehet választani. Akkor választunk ki egy görbét, ha a vektorizált töröttvonal a kurzor körüli 5x5 pixel méretû négyzetet átmetszi. Ha egyszerre választjuk ki a KK-spline-t és a Catmull-Rom spline-t, akkor a KK-spline-nak van prioritása. Az egér jobb gomb újbóli lenyomása a kiválasztott görbét a két jobb klikk közötti elmozdulásnak megfelelõen eltolja. A világba belezoomolni a z betû lenyomásával lehet, amikor a kurzor jelenlegi helye nem mozdul el, de a kamera ablak a zoom elõtti mérethez képest tized akkorára esik össze, azaz a világ elemei a korábbihoz képest tízszer nagyobbnak fognak látszódni. Egymás után többször is lehet belezoomolni, amikor egyre nagyobb nagyítás érhetõ el. A kizoomolás mûvelet nem kötelezõ mûsorszám, de igény esetén Z betûre megvalósítható.
+
+Beadási határidõ: 2012. 10. 23. 23:59
+
+Harmadik feladat
+
+Készítsen kétirányú sugárkövetõ programot, amely egy diffúz barnás téglalap asztalon álló üvegtéglába zárt aranytóruszt jelenít meg.
+
+A tórusz az üvegben egy levegõbuborék belsejében helyezkedik el. A buborék választható ellipszoidnak, gömbnek, vagy akár téglatestnek is. A tóruszt geometriailag max 100 db, árnyalónormálokkal ellátott háromszögre kell bontani. A visszaverõdési irányok számításánál a lineárisan interpolált árnyalónormállal kell dolgozni. A színteret az egy fehér pontfényforrás világítja meg, amely egy félgömb irányaiban egyenletes sugársûrûséggel világít. A színteret világos színû égbolt veszi közre, amely minden irányban egyenletesen sugárzó fényforrásként viselkedik. A fényforrások teljesítménye tetszõleges, pozitív értékre állítható, a cél, hogy a kép szép legyen. A kausztikus jelenségek kezelése miatt a lövõfázis a pontfényforrásból 10000 sugarat indít, amelyekbõl a simafelületekkel találkozottak végül az asztalhoz rendelt fotontérképben tárolja. A fotontérképpel indirekten és a fényforrással direkt módon megvilágított színteret sugárkövetéssel fényképezze le. A számított sugársûrûségeket lineáris vagy akár nem lineáris tone-mapping alkalmazásával kell a megjeleníthetõ dinamikai tartományba konvertálni.
+
+Szépségverseny: A fényforrás, illetve az alakzatok mozgatásával video készíthetõ, amellyel szépségversenyen lehet indulni. Itt a paraméterekre semmiféle korlátozás sincs.
+
+Beadási határidõ: 2012. 11. 11. 23:59
+
+Negyedik feladat
+
+Készítsen helikoptert és alatta elterülõ tájat. A helikopter (http://hu.wikipedia.org/wiki/Helikopter) háromszöghálóból, ellipszoidbõl és hengerbõl összerakott testtel rendelkezik, kétágú, forgatható fõrotorja van (egy lapát egy téglatest), és háromágú csak kisebb farok rotorja.
+
+A helikoptert a RPY szögeivel lehet kormányozni: R-E a roll, P-O a pitch, Y-X pedig a yaw szöget növeli, illetve csökkenti 20 fokkal. A virtuális kamera a helikopter felett van valamivel és kissé lefele néz, úgy, hogy az optikai tengelye a helikopter közepén átmenjen. A helikopter teste diffúz-spekuláris khaki-színûre van festve, a pilótafülke átlátszó, spekuláris, a forgólapátok szürke spekuláris jellegûek.
+
+A helikopter pillanatnyi orientációját a kvaterniójának a megjelenítésével is megmutatjuk. Egy kvaterniót a helikopter közepébõl induló piros diffúz-spekuláris nyíllal láttatjuk (nyíl=henger + a végén kúp), amelynek iránya párhuzamos a kvaternió képzetes részének irányával, hossza pedig arányos a valós rész abszolút értékével. Az arányossági tényezõt úgy kell beállítani, hogy 90 fokos elforgatásnál a nyíl kb. kétszer hosszabb legyen a helikopter hosszánál.
+
+A tájat egy nagy tesszellált téglalapból kell létrehozni, amelyet procedúrális (!) textúrával látunk el. A tájon elszórt épületek állnak
+
+A helikoptert és a tájat a nap (irányfényforrás) és az ég (ambiens fényforrás) világítja meg.
+
+Beadási határidõ: 2012. 12. 02. 23:59
+
+ötödik feladat
+
+Animálja a 4. feladat helikopterét a következõképpen. A fõ és mellékrotor állandó szögsebességgel forog. Az R,P,Y (nagybetûkkel!) szögek a helikopter aktuális koordinátarendszeréhez képest értendõk, azaz a helikopter saját magához képest kormányozzuk. A helikoptert két kormányzás között egyenesvonalú egyenletes mozgást végez elõre, és egy a helikopterhez gumikötéllel odakötött, léggömbön függõ kamerával követjük. A léggömbbõl adódó felhajtóerõ állandó, a légellenállás a sebességgel arányos. A kamera mindig a gumikötés húzásának irányába néz. SPACE billenntyû lenyomására a helikopter egy gumilabdád lõ ki, amely a terepen pattog, a "bounciness" 0.9, azaz az ütközéskor a merõleges sebesség abszolút értéke az eredeti 90 százaléka lesz.
+
+Beadási határidõ: 2012. 12. 10. 23:59
